@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: node ${{ matrix.node }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        node: [22, 24]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Show versions
+        run: |
+          node --version
+          npm --version
+
+      - name: Install (no dependencies)
+        run: npm install --no-audit --no-fund
+
+      - name: Syntax check entry points
+        run: npm run check
+
+      - name: Unit tests
+        run: npm test
+        env:
+          CI: "true"
+
+      - name: CLI smoke test
+        shell: bash
+        run: |
+          set +e
+          node bin/attach-cdp.mjs --version
+          node bin/attach-cdp.mjs doctor --json
+          # doctor exits 1 when no browser is available, which is expected on CI
+          test "$(node bin/attach-cdp.mjs --version)" != ""
