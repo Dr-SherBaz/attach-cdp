@@ -4,7 +4,7 @@
     "servers": {
       "chrome-devtools": {
         "type": "local",
-        "command": ["npx", "github:Dr-SherBaz/attach-cdp", "mcp"]
+        "command": ["npx", "-y", "attach-cdp", "mcp"]
       }
     }
   }

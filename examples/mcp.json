@@ -2,7 +2,7 @@
   "mcpServers": {
     "chrome-devtools": {
       "command": "npx",
-      "args": ["github:Dr-SherBaz/attach-cdp", "mcp"]
+      "args": ["-y", "attach-cdp", "mcp"]
     }
   }
 }

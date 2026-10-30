@@ -1,5 +1,9 @@
 # attach-cdp
 
+[![npm version](https://img.shields.io/npm/v/attach-cdp.svg)](https://www.npmjs.com/package/attach-cdp)
+[![CI](https://github.com/Dr-SherBaz/attach-cdp/actions/workflows/ci.yml/badge.svg)](https://github.com/Dr-SherBaz/attach-cdp/actions/workflows/ci.yml)
+[![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 **Drive the Chrome you are already logged into — from your terminal, or from an AI agent.**
 
 Most browser automation starts a *new* browser: empty profile, no cookies, no sessions, so the first thing it hits is a login wall. `attach-cdp` does the opposite. It finds the Chromium browser that is already running on your machine, connects to it over the DevTools Protocol, and works with your real tabs.
@@ -68,12 +72,18 @@ Chrome 144+ also lets you turn this on from `chrome://inspect/#remote-debugging`
 
 ## Install
 
-The package is not on npm yet, so install straight from the repository:
+```bash
+npm install -g attach-cdp
+# or run without installing
+npx attach-cdp doctor
+```
+
+From source, if you want to hack on it:
 
 ```bash
 git clone https://github.com/Dr-SherBaz/attach-cdp.git
 cd attach-cdp
-npm link          # optional: puts attach-cdp and attach-cdp-mcp on your PATH
+npm link          # puts attach-cdp and attach-cdp-mcp on your PATH
 ```
 
 Without `npm link`, run the entry points directly:
@@ -81,12 +91,6 @@ Without `npm link`, run the entry points directly:
 ```bash
 node bin/attach-cdp.mjs doctor
 node bin/attach-cdp-mcp.mjs
-```
-
-Or use `npx` against the repository, no clone needed:
-
-```bash
-npx github:Dr-SherBaz/attach-cdp doctor
 ```
 
 ## Quick start
@@ -166,7 +170,7 @@ It resolves the endpoint, then execs `chrome-devtools-mcp --wsEndpoint <url>`. I
     "servers": {
       "chrome-devtools": {
         "type": "local",
-        "command": ["node", "C:\\path\\to\\attach-cdp\\bin\\attach-cdp-mcp.mjs"]
+        "command": ["npx", "-y", "attach-cdp", "mcp"]
       }
     }
   }
@@ -176,7 +180,7 @@ It resolves the endpoint, then execs `chrome-devtools-mcp --wsEndpoint <url>`. I
 ### Claude Code
 
 ```bash
-claude mcp add chrome-devtools -- node /path/to/attach-cdp/bin/attach-cdp-mcp.mjs
+claude mcp add chrome-devtools -- npx -y attach-cdp mcp
 ```
 
 ### Claude Desktop / Cursor / Zed
@@ -186,7 +190,7 @@ claude mcp add chrome-devtools -- node /path/to/attach-cdp/bin/attach-cdp-mcp.mj
   "mcpServers": {
     "chrome-devtools": {
       "command": "npx",
-      "args": ["github:Dr-SherBaz/attach-cdp", "mcp"]
+      "args": ["-y", "attach-cdp", "mcp"]
     }
   }
 }
