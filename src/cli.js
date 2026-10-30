@@ -165,6 +165,22 @@ async function readExpression(positionals, options) {
   return positionals.join(" ");
 }
 
+/** Open a connection, retrying briefly: Chromium sometimes refuses a new
+ * debugger socket for a second or two while another session detaches. */
+async function openWithRetry(wsEndpoint, attempts = 8, delayMs = 2000) {
+  let lastError;
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    try {
+      return await cdp.Connection.open(wsEndpoint);
+    } catch (error) {
+      lastError = error;
+      if (attempt === attempts) break;
+      await new Promise((resolve) => setTimeout(resolve, delayMs));
+    }
+  }
+  throw lastError;
+}
+
 /** Open a connection, run the action, always close. */
 async function withBrowser(options, action) {
   const endpoint = await resolveEndpoint({
@@ -172,7 +188,8 @@ async function withBrowser(options, action) {
     port: typeof options.port === "string" || typeof options.port === "number" ? options.port : undefined,
   });
 
-  const conn = await cdp.Connection.open(endpoint.wsEndpoint);
+  const retries = Number(options.retries) > 0 ? Number(options.retries) : 8;
+  const conn = await openWithRetry(endpoint.wsEndpoint, retries);
   try {
     return await action(conn, endpoint);
   } finally {

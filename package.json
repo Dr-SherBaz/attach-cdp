@@ -1,6 +1,6 @@
 {
   "name": "attach-cdp",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Attach to your already-running Chrome over the DevTools protocol: a dependency-free CLI and an MCP bridge for AI agents.",
   "keywords": [
     "chrome",

@@ -8,6 +8,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 Nothing yet.
 
+## [0.1.1] - 2026-10-30
+
+### Changed
+
+- Documentation now installs from npm (`npm i -g attach-cdp`) and configures MCP
+  clients with `npx -y attach-cdp mcp`.
+- Releases are published from GitHub Actions with npm trusted publishing (OIDC)
+  and provenance, so no publish tokens are stored anywhere.
+
+### Fixed
+
+- The CLI retries the debugger connection instead of failing when Chromium
+  briefly refuses a new WebSocket (common right after another session detaches).
+
 ## [0.1.0] - 2026-10-30
 
 First release.
@@ -36,5 +50,6 @@ First release.
 
 - `list | head` no longer crashes with `EPIPE`.
 
-[Unreleased]: https://github.com/Dr-SherBaz/attach-cdp/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/Dr-SherBaz/attach-cdp/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/Dr-SherBaz/attach-cdp/releases/tag/v0.1.1
 [0.1.0]: https://github.com/Dr-SherBaz/attach-cdp/releases/tag/v0.1.0
