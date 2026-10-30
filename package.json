@@ -1,0 +1,47 @@
+{
+  "name": "attach-cdp",
+  "version": "0.1.0",
+  "description": "Attach to your already-running Chrome over the DevTools protocol: a dependency-free CLI and an MCP bridge for AI agents.",
+  "keywords": [
+    "chrome",
+    "cdp",
+    "devtools-protocol",
+    "mcp",
+    "model-context-protocol",
+    "automation",
+    "browser"
+  ],
+  "license": "MIT",
+  "author": "Muhammad Sher Baz Ali <178058739+Dr-SherBaz@users.noreply.github.com> (https://github.com/Dr-SherBaz)",
+  "type": "module",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "bin": {
+    "attach-cdp": "bin/attach-cdp.mjs",
+    "attach-cdp-mcp": "bin/attach-cdp-mcp.mjs"
+  },
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "files": [
+    "bin",
+    "src",
+    "README.md",
+    "LICENSE",
+    "SECURITY.md"
+  ],
+  "scripts": {
+    "test": "node --test \"test/**/*.test.js\"",
+    "test:integration": "node --test test/integration.test.js",
+    "check": "node --check src/cli.js && node --check bin/attach-cdp.mjs && node --check bin/attach-cdp-mcp.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dr-SherBaz/attach-cdp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Dr-SherBaz/attach-cdp/issues"
+  },
+  "homepage": "https://github.com/Dr-SherBaz/attach-cdp#readme"
+}

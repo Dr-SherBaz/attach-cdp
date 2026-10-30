@@ -1,0 +1,17 @@
+node_modules/
+npm-debug.log*
+*.log
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# local artifacts
+attach-cdp-*.png
+attach-cdp-*.jpeg
+attach-cdp-*.webp
+attach-cdp-*.pdf
+coverage/
+.nyc_output/
+*.tgz
+.env
+.env.*

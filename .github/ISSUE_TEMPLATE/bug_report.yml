@@ -1,0 +1,48 @@
+name: Bug report
+description: Something did not work as expected
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report. `attach-cdp doctor` output answers most questions up front.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: The command you ran and the output you got.
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+    validations:
+      required: true
+  - type: textarea
+    id: doctor
+    attributes:
+      label: Output of `attach-cdp doctor`
+      description: Redact anything private; the endpoint URL and tab list are usually enough.
+      render: shell
+    validations:
+      required: true
+  - type: input
+    id: versions
+    attributes:
+      label: Environment
+      description: Node version, OS, browser and browser version
+      placeholder: node 24.19.0, Windows 11, Chrome 156.0.8078.76
+    validations:
+      required: true
+  - type: dropdown
+    id: mode
+    attributes:
+      label: How are you using it?
+      options:
+        - CLI
+        - MCP bridge
+        - Programmatic API
+    validations:
+      required: true
